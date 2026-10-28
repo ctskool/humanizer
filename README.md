@@ -1,8 +1,8 @@
-# Humanizer 
+# Humanizer, with saved voices
 
-sponsored by [cfo.ai](https://cfo.ai)
+This is a fork of [blader/humanizer](https://github.com/blader/humanizer) by Chase AI. It adds one thing: Humanizer can interview you, study your writing (or a writer you want to sound like), and save a voice profile that every rewrite uses. Everything else, including the 26 patterns, is blader's work. See [Learn your voice](#learn-your-voice) for the new part.
 
-[![GitHub stars](https://img.shields.io/github/stars/blader/humanizer?style=flat)](https://github.com/blader/humanizer/stargazers) [![skills.sh installs](https://skills.sh/b/blader/humanizer)](https://skills.sh/blader/humanizer) 
+The original is sponsored by [cfo.ai](https://cfo.ai).
 
 
 Humanizer makes AI-written text sound like a person wrote it, without changing what it says. It is built on Wikipedia's [Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), the guide Wikipedia editors use to catch AI-generated text, and it works in Claude Code, Codex, and any other agent that supports skills.
@@ -36,16 +36,16 @@ Once installed, the skill answers to `/humanizer`.
 ### Claude Code
 
 ```text
-/plugin marketplace add blader/humanizer
-/plugin install humanizer@humanizer
+/plugin marketplace add ctskool/humanizer
+/plugin install humanizer@chase-ai-humanizer
 ```
 
-The plugin answers to `/humanizer:humanizer`. It needs Claude Code 2.1.142 or newer; on older versions, use `npx skills add blader/humanizer --global --agent claude-code`.
+The plugin answers to `/humanizer:humanizer`. It needs Claude Code 2.1.142 or newer; on older versions, use `npx skills add ctskool/humanizer --global --agent claude-code`.
 
 ### Codex
 
 ```bash
-npx skills add blader/humanizer --global --agent codex
+npx skills add ctskool/humanizer --global --agent codex
 ```
 
 ### Claude.ai and Claude Desktop
@@ -55,7 +55,7 @@ Download this repository as a ZIP (**Code → Download ZIP**) and upload it as a
 ### Other agents
 
 ```bash
-npx skills add blader/humanizer --global --agent '*'
+npx skills add ctskool/humanizer --global --agent '*'
 ```
 
 This installs Humanizer for every agent the Skills CLI supports, including Gemini CLI, GitHub Copilot, and Windsurf. Leave off `--global` in any command above to install it only in the current project. For an agent the Skills CLI does not know, copy `SKILL.md` into its skill folder.
@@ -97,6 +97,28 @@ Now humanize this text:
 ```
 
 Humanizer follows the sample's rhythm, word choice, punctuation, and deliberate quirks, including dashes if you use them.
+
+### Learn your voice
+
+Pasting a sample works once. To make Humanizer sound like you every time, have it learn your voice:
+
+```
+/humanizer learn my voice
+```
+
+Humanizer then walks you through seven steps, waiting for you at each one:
+
+1. It asks whose voice this is (yours, or a writer you want to sound more like) and what it's for (everything, or one channel such as LinkedIn or email).
+2. You give it three to ten pieces of writing, about 1,500 words in total. Transcripts of you talking (videos, podcasts, voice notes) work too.
+3. It interviews you, three or four questions at a time: your reader, how formal you are, words you love and words you never use, how you open and close.
+4. It studies the samples: sentence and paragraph length, punctuation, openings, closings, and signature moves.
+5. It writes a voice profile from [`voice-profile-template.md`](voice-profile-template.md) and revises it with you.
+6. It tests the profile on a before and after, and adjusts until the after sounds like you.
+7. It saves the profile to `~/.humanizer/voices/<name>.md`.
+
+From then on, `/humanizer` uses your `default` voice. Ask for another by name ("use my linkedin voice"), or say "update my voice" to add new samples. For another writer's style, Humanizer learns the shape of their writing only and never reuses their lines.
+
+Profiles record style, not content: your samples are not saved. The full steps are in [`voice-setup.md`](voice-setup.md).
 
 ## How it works
 

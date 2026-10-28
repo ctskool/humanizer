@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.2.0
+
+- Fork by Chase AI (ctskool) that adds saved voices. Humanizer now reads a voice profile from `~/.humanizer/voices/` before rewriting, and treats it like a writing sample.
+- Added `voice-setup.md`: when the user asks to learn their voice, Humanizer collects samples, interviews them, studies the samples, writes a profile from `voice-profile-template.md`, tests it on a before and after, and saves it. Works for the user's own voice or the style of a writer they admire.
+- The 26 patterns are unchanged from 3.1.0.
+
 ## 3.1.0
 
 - Added pattern #26 and section F for replies that re-explain context the reader already has (#269). It acts on replies, not standalone writing. 26 patterns total.

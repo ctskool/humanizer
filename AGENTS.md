@@ -11,6 +11,8 @@ Keep the skill portable. Do not write instructions that limit it to one or two a
 ## Key files
 
 - `SKILL.md` is the source of truth and the repo's only skill file. It contains portable YAML metadata, an account of why AI text sounds the way it does, and numbered patterns grouped in six sections and ordered by strength and frequency.
+- `voice-setup.md` is read only when the user sets up or updates a voice. It runs the interview and writes a profile.
+- `voice-profile-template.md` is the shape every saved profile follows. Keep profiles under 600 words; every rewrite reads one.
 - `README.md` explains installation, use, and patterns.
 - `CHANGELOG.md` holds the release notes, newest first. Old notes keep the pattern numbers their release used.
 - `.claude-plugin/plugin.json` describes the Claude plugin and points its skill loader at the root `SKILL.md`.

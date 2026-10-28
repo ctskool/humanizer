@@ -70,10 +70,11 @@ if len(package_versions) != 1:
     )
 
 skill_files = {path.relative_to(ROOT) for path in ROOT.rglob("SKILL.md")}
-if SKILL_PATH.is_symlink() or skill_files != {Path("SKILL.md")}:
-    raise SystemExit("Keep one regular SKILL.md at the repo root")
-if PLUGIN.get("skills") != ["./"]:
-    raise SystemExit("Point the Claude plugin skill loader at the repo root")
+platform_skills = sorted(path.parent.as_posix() for path in skill_files if path.parts[0] == "skills" and len(path.parts) == 3)
+if SKILL_PATH.is_symlink() or skill_files != {Path("SKILL.md"), *(Path(p) / "SKILL.md" for p in platform_skills)}:
+    raise SystemExit("Keep one regular SKILL.md at the repo root, plus platform skills in skills/<name>/SKILL.md")
+if PLUGIN.get("skills") != ["./", *(f"./{p}" for p in platform_skills)]:
+    raise SystemExit("Point the Claude plugin skill loader at the repo root, then each folder in skills/ in name order")
 if CURSOR_PLUGIN.get("name") != "humanizer":
     raise SystemExit("Set the Cursor plugin name to humanizer")
 if "skills" in CURSOR_PLUGIN:

@@ -120,6 +120,22 @@ From then on, `/humanizer` uses your `default` voice. Ask for another by name ("
 
 Profiles record style, not content: your samples are not saved. The full steps are in [`voice-setup.md`](voice-setup.md).
 
+### One voice, every platform
+
+Give Humanizer a source (a news story, a link, notes, a transcript) and a platform skill writes it in your saved voice, shaped for that platform, then runs the full Humanizer pass on it:
+
+| Skill | Writes | Shape it follows |
+|---|---|---|
+| `/humanizer-linkedin` | a LinkedIn post | the hook in the first two lines, short paragraphs, your take, 0 to 3 hashtags |
+| `/humanizer-x` | a post or a thread | under 280 characters, a first post that stands alone, links at the end |
+| `/humanizer-email` | a newsletter or a one-to-one email | two subject lines, preview text, one ask |
+
+```
+/humanizer-linkedin https://example.com/news-story
+```
+
+Each one offers to save a draft if a tool for that platform is connected (Gmail, for example), and never posts or sends without your yes. The plugin installs all three. With the Skills CLI or by hand, copy the folders in [`skills/`](skills/) next to `humanizer`. To add a platform, copy one of those folders and change its shape rules.
+
 ## How it works
 
 A language model writes whatever is most likely to come next, so by default it makes the choice that fits the widest range of readers and subjects. A person chooses for one reader and one subject. Every tell Humanizer looks for is a form of that default choice: a sentence that signals importance instead of adding a fact, rhythm or formatting applied by rule, an ordinary fact dressed as a pivotal one, text left over from the chat, or a reply that re-explains what the reader already knows.

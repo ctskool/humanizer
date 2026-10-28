@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.3.0
+
+- Added three platform skills that write a source (a news story, a link, notes, a transcript) in the saved voice, shaped for one platform, then run the full Humanizer pass: `/humanizer-linkedin`, `/humanizer-x` and `/humanizer-email`. Each offers to save a draft when a tool for that platform is connected and never posts or sends without the user's yes.
+- The 26 patterns are unchanged.
+
 ## 3.2.0
 
 - Fork by Chase AI (ctskool) that adds saved voices. Humanizer now reads a voice profile from `~/.humanizer/voices/` before rewriting, and treats it like a writing sample.
